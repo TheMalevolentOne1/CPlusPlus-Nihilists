@@ -1,0 +1,10 @@
+If assistance is necessary in understanding some of the terminology in the docs please let me know.
+
+W3Schools:
+https://www.w3schools.com/cpp/
+
+Official Python Documentation:
+https://en.cppreference.com/w/
+
+c++ Developer Documentation:
+https://devdocs.io/cpp/

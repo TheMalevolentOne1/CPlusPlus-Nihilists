@@ -1,0 +1,10 @@
+If assistance is necessary in understanding some of the terminology in the docs please let me know.
+
+W3Schools:
+https://www.w3schools.com/python/
+
+Official Python Documentation:
+https://docs.python.org/3/
+
+Real Python:
+https://realpython.com/documenting-python-code/
