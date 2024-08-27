@@ -1,0 +1,43 @@
+const int ignore_chars = 20;
+const int default_num = -1;
+
+/*
+Brief:
+Gets a number from the user
+
+Parameters:
+(in) upperBound (highest value the user can enter)
+(in) lowerBound (lowest value the user can enter)
+
+(out) user's entered number
+*/
+int getNumber(int upperBound = 0, int lowerBound = 0, bool restrictBounds = false)
+{
+	int num = default_num;
+
+	while (cin.fail() || (num > lowerBound || num < upperBound))
+	{
+		cin.clear();
+		cin.ignore(ignore_chars, '\n');
+		cout << "Please enter a number: ";
+		cin >> num;
+
+		
+
+		if ((num > lowerBound || num < upperBound) && !(upperBound >= 0) && restrictBounds)
+		{
+			cout << endl << "Invalid Number" << endl;
+		}
+		else if (cin.fail())
+		{
+			cin.clear();
+			cin.ignore(ignore_chars, '\n');
+			cout << "Must be a number" << endl;
+		}
+		else if (!restrictBounds)
+			return num;
+	}
+	
+
+	return num;
+}

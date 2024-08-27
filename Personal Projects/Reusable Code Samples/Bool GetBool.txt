@@ -1,0 +1,27 @@
+REQUIRES ToLower() TO USE!
+
+/*
+Brief:
+Asks the user for a true or false response to a question
+
+Parameters:
+(in) question (Default: blank string) (Question the user is asked)
+
+(out) userChoice (user's answer returned as a boolean)
+*/
+bool GetBool(string question = "blank")
+{
+	string userChoice = "";
+
+	cout << question << endl;
+
+	while (userChoice != "y" && userChoice != "n")
+	{
+		cout << "Please enter y or n (Yes or no): " << endl;
+		cin >> userChoice;
+
+		userChoice = To_Lower(userChoice)
+	}
+
+	return (userChoice) == "y" ? true : false;
+}
