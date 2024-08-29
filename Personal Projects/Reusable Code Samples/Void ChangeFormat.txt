@@ -1,0 +1,12 @@
+/*
+Brief:
+Change the formatting of decimal point numbers (std::cout)
+
+Parameters:
+(in) decimalPlaces (Number of decimals places to display to the user)
+*/
+void changeFormat(int decimalPlaces)
+{
+	cout << setprecision(decimalPlaces) << fixed;
+	return;
+}

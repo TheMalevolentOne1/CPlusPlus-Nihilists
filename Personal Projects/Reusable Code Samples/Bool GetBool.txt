@@ -19,9 +19,7 @@ bool GetBool(string question = "blank")
 	{
 		cout << "Please enter y or n (Yes or no): " << endl;
 		cin >> userChoice;
-
-		userChoice = To_Lower(userChoice)
 	}
 
-	return (userChoice) == "y" ? true : false;
+	return (ToLower(userChoice)) == "y" ? true : false;
 }

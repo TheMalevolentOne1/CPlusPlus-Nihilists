@@ -1,4 +1,0 @@
-﻿  source.cpp
-C:\Users\KRobinson25\Desktop\C++ Project Junk (Code Stil There)\GitHub\CPlusPlus-Nihilists\Personal Projects\C++\1) Simple Calculator\source.cpp(115,43): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\KRobinson25\Desktop\C++ Project Junk (Code Stil There)\GitHub\CPlusPlus-Nihilists\Personal Projects\C++\1) Simple Calculator\source.cpp(115,43): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
-  1) Simple Calculator.vcxproj -> C:\Users\KRobinson25\Desktop\C++ Project Junk (Code Stil There)\GitHub\CPlusPlus-Nihilists\Personal Projects\C++\1) Simple Calculator\x64\Debug\1) Simple Calculator.exe

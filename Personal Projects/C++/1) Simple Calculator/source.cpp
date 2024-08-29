@@ -14,8 +14,13 @@ Include Zero Error Handling
 
 using namespace std;
 
-//changes decimal formatting for cout
+/*
+Brief:
+Change the formatting of decimal point numbers (std::cout)
 
+Parameters:
+(in) decimalPlaces (Number of decimals places to display to the user)
+*/
 void changeFormat(int decimalPlaces)
 {
 	cout << setprecision(decimalPlaces) << fixed;
@@ -32,7 +37,7 @@ Gets a number from the user
 Parameters:
 (in) upperBound (highest value the user can enter)
 (in) lowerBound (lowest value the user can enter)
-
+(in) restrictBounds (true or false whether to enforce the range boundary)
 (out) user's entered number
 */
 int GetNumber(int lowerBound = 0, int upperBound = 0, bool restrictBounds = false)
@@ -44,14 +49,19 @@ int GetNumber(int lowerBound = 0, int upperBound = 0, bool restrictBounds = fals
 		cout << "Please enter a number: ";
 		cin >> num;
 
+		if (!restrictBounds && !cin.fail())
+			return num;
+		else if (!cin.fail() && restrictBounds && (num < lowerBound || num > upperBound))
+		{
+			cout << "Invalid Option.\nPlease select between " << lowerBound << " and " << upperBound << endl;
+		}
+
 		if (cin.fail())
 		{
 			cin.clear();
 			cin.ignore(ignore_chars, '\n');
 			cout << "Must be a number!" << endl;
 		}
-		else if (!restrictBounds)
-			return num;
 	}
 
 	return num;
@@ -95,11 +105,9 @@ bool GetBool(string question = "blank")
 	{
 		cout << "Please enter y or n (Yes or no): " << endl;
 		cin >> userChoice;
-
-		userChoice = ToLower(userChoice);
 	}
 
-	return (userChoice) == "y" ? true : false;
+	return (ToLower(userChoice)) == "y" ? true : false;
 }
 
 // Vector containing all menu options
@@ -111,20 +119,26 @@ static vector<string> menuOptions =
 	"4) Multiplication"
 };
 
+// Menu Value Range
 const int menuLow = 1;
-const int menuMax = menuOptions.size() - 1;
+const int menuMax = menuOptions.size();
+const int userMenuOffset = 1;
 
+// Menu Options
 const int addChoice = 1;
 const int subChoice = 2;
 const int divChoice = 3;
 const int multChoice = 4;
 
+// Characters
+char divisionSymbol = '\u00F7';
 // Main Menu
 int main()
 {
+	system("cls");
 	cout << "C++ Practice: Simple Calculator" << endl;
 
-	changeFormat(2);
+	changeFormat(1);
 
 
 	// Displays the menu options
@@ -139,7 +153,7 @@ int main()
 	string equation = "";
 	int timesUsed = 0;
 	double total = 0.0;
-	int userNum = 0;
+	double userNum = 0.0;
 
 	switch (userChoice)
 	{
@@ -149,28 +163,42 @@ int main()
 			while (!solved)
 			{
 				system("cls");
-
-				cout << timesUsed << endl;
 				cout << "Addition Calculator" << endl;
-				if (timesUsed >= 2)
+				if (timesUsed == 0)
 				{
+					cout << "Please enter starting value:" << endl;
+					total = GetNumber();
+					equation += to_string(total) + divisionSymbol;
+				}
+				else
+				{
+					system("cls");
+
+					cout << "Please enter a number to add by:" << endl;
+					userNum = GetNumber();
+
+
+					total += userNum;
+					equation += to_string(userNum) + "  ";
+
 					equation[equation.length() - 2] = '=';
 
 					cout << equation << " " << total << endl;
 
 					solved = GetBool("Is your calculation done?: ");
-					
+
+					cout << endl << solved << endl;
+
 					if (!solved)
 					{
-						equation[equation.length() - 2] = '+';
+						equation[equation.length() - 2] = divisionSymbol;
 					}
 				}
 
-				userNum = GetNumber();
-				total += userNum;
-				equation += to_string(userNum) + " + ";
 				timesUsed++;
 			}
+
+			main();
 			break;
 		}
 
@@ -189,6 +217,8 @@ int main()
 				}
 				else
 				{
+					system("cls");
+
 					cout << "Please enter a number to subtract by:" << endl;
 					userNum = GetNumber();
 
@@ -202,6 +232,8 @@ int main()
 
 					solved = GetBool("Is your calculation done?: ");
 
+					cout  << endl << solved << endl;
+
 					if (!solved)
 					{
 						equation[equation.length() - 2] = '-';
@@ -210,26 +242,104 @@ int main()
 
 				timesUsed++;
 			}
+		
+			main();
 			break;
 		}
 
 		// Division Section
 		case(divChoice):
 		{
+			while (!solved)
+			{
+				system("cls");
+				cout << "Division Calculator" << endl;
+				if (timesUsed == 0)
+				{
+					cout << "Please enter starting value:" << endl;
+					total = GetNumber();
+					equation += to_string(total) + divisionSymbol;
+				}
+				else
+				{
+					system("cls");
+
+					cout << "Please enter a number to divide by:" << endl;
+					userNum = GetNumber();
+
+
+					total /= userNum;
+					equation += to_string(userNum) + "  ";
+
+					equation[equation.length() - 2] = '=';
+
+					cout << equation << " " << total << endl;
+
+					solved = GetBool("Is your calculation done?: ");
+
+					cout << endl << solved << endl;
+
+					if (!solved)
+					{
+						equation[equation.length() - 2] = divisionSymbol;
+					}
+				}
+
+				timesUsed++;
+			}
+
+			main();
 			break;
 		}
 
 		// Multiplication Section
 		case(multChoice):
 		{
+			while (!solved)
+			{
+				system("cls");
+				cout << "Multiplication Calculator" << endl;
+				if (timesUsed == 0)
+				{
+					cout << "Please enter starting value:" << endl;
+					total = GetNumber();
+					equation += to_string(total) + divisionSymbol;
+				}
+				else
+				{
+					system("cls");
+
+					cout << "Please enter a number to multiply by:" << endl;
+					userNum = GetNumber();
+
+
+					total *= userNum;
+					equation += to_string(userNum) + "  ";
+
+					equation[equation.length() - 2] = '=';
+
+					cout << equation << " " << total << endl;
+
+					solved = GetBool("Is your calculation done?: ");
+
+					cout << endl << solved << endl;
+
+					if (!solved)
+					{
+						equation[equation.length() - 2] = divisionSymbol;
+					}
+				}
+
+				timesUsed++;
+			}
+
+			main();
 			break;
 		}
 
-		// Else
 		default:
 		{
 			cout << "Invalid Option" << endl;
-			system("clear");
 		}
 	}
 

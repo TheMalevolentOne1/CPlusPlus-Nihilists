@@ -1,6 +1,3 @@
-const int ignore_chars = 20;
-const int default_num = -1;
-
 /*
 Brief:
 Gets a number from the user
@@ -8,36 +5,32 @@ Gets a number from the user
 Parameters:
 (in) upperBound (highest value the user can enter)
 (in) lowerBound (lowest value the user can enter)
-
+(in) restrictBounds (true or false whether to enforce the range boundary)
 (out) user's entered number
 */
-int getNumber(int upperBound = 0, int lowerBound = 0, bool restrictBounds = false)
+int GetNumber(int lowerBound = 0, int upperBound = 0, bool restrictBounds = false)
 {
 	int num = default_num;
 
-	while (cin.fail() || (num > lowerBound || num < upperBound))
+	while (cin.fail() || (num < lowerBound || num > upperBound))
 	{
-		cin.clear();
-		cin.ignore(ignore_chars, '\n');
 		cout << "Please enter a number: ";
 		cin >> num;
 
-		
-
-		if ((num > lowerBound || num < upperBound) && !(upperBound >= 0) && restrictBounds)
+		if (!restrictBounds && !cin.fail())
+			return num;
+		else if (!cin.fail() && restrictBounds && (num < lowerBound || num > upperBound))
 		{
-			cout << endl << "Invalid Number" << endl;
+			cout << "Invalid Option.\nPlease select between " << lowerBound << " and " << upperBound << endl;
 		}
-		else if (cin.fail())
+
+		if (cin.fail())
 		{
 			cin.clear();
 			cin.ignore(ignore_chars, '\n');
-			cout << "Must be a number" << endl;
+			cout << "Must be a number!" << endl;
 		}
-		else if (!restrictBounds)
-			return num;
 	}
-	
 
 	return num;
 }
